@@ -11,14 +11,14 @@
 	color:#999;
 	display:block;
 	font-size:0.8125em;
-	width:19px;
-	height:19px;
-	padding:5px;
+	width:23px;
+	height:23px;
+	padding:1.1px;
 	border-radius:50%;
 	background:#FFF;
 	position:absolute;
-	left:52%;
-	top:6px;
+	left:51%;
+	top:12px;
 	margin-left:-18px;
 	line-height:19px;
 }
