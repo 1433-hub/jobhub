@@ -12,102 +12,229 @@
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <link href='https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css' rel='stylesheet'>
     <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet'>
-    <style>@import url(https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap);
+    <style>
+    @import url('https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&subset=devanagari,latin-ext');
 
-        body {
-            font-family: "Roboto", sans-serif;
-            background: #E6E9ED;
-            min-height: 100vh;
-            position: relative;
-        }
-        </style>
+    /* #Primary
+    ================================================== */
+
+    body{
+        font-family: 'Poppins', sans-serif;
+        font-size: 16px;
+        line-height: 24px;
+        font-weight: 400;
+        color: #212112;
+        background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat-back.svg');
+        background-position: center;
+        background-repeat: repeat;
+        background-size: 7%;
+        background-color: #fff;
+        overflow-x: hidden;
+        transition: all 200ms linear;
+    }
+    ::selection {
+        color: #fff;
+        background-color: #8167a9;
+    }
+    ::-moz-selection {
+        color: #fff;
+        background-color: #8167a9;
+    }
+
+
+    /* #Navigation
+    ================================================== */
+
+    .start-header {
+        opacity: 1;
+        transform: translateY(0);
+        padding: 20px 0;
+        box-shadow: 0 10px 30px 0 rgba(138, 155, 165, 0.15);
+        -webkit-transition : all 0.3s ease-out;
+        transition : all 0.3s ease-out;
+    }
+    .start-header.scroll-on {
+        box-shadow: 0 5px 10px 0 rgba(138, 155, 165, 0.15);
+        padding: 10px 0;
+        -webkit-transition : all 0.3s ease-out;
+        transition : all 0.3s ease-out;
+    }
+    .start-header.scroll-on .navbar-brand img{
+        height: 24px;
+        -webkit-transition : all 0.3s ease-out;
+        transition : all 0.3s ease-out;
+    }
+    .navigation-wrap{
+        position: fixed;
+        width: 100%;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        -webkit-transition : all 0.3s ease-out;
+        transition : all 0.3s ease-out;
+    }
+    .navbar{
+        padding: 0;
+    }
+    .navbar-brand img{
+        height: 28px;
+        width: auto;
+        display: block;
+    filter: brightness(10%);
+        -webkit-transition : all 0.3s ease-out;
+        transition : all 0.3s ease-out;
+    }
+    .navbar-toggler {
+        float: right;
+        border: none;
+        padding-right: 0;
+    }
+    .navbar-toggler:active,
+    .navbar-toggler:focus {
+        outline: none;
+    }
+    .navbar-light .navbar-toggler-icon {
+        width: 24px;
+        height: 17px;
+        background-image: none;
+        position: relative;
+        border-bottom: 1px solid #000;
+        transition: all 300ms linear;
+    }
+    .navbar-light .navbar-toggler-icon:after, 
+    .navbar-light .navbar-toggler-icon:before{
+        width: 24px;
+        position: absolute;
+        height: 1px;
+        background-color: #000;
+        top: 0;
+        left: 0;
+        content: '';
+        z-index: 2;
+        transition: all 300ms linear;
+    }
+    .navbar-light .navbar-toggler-icon:after{
+        top: 8px;
+    }
+    .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon:after {
+        transform: rotate(45deg);
+    }
+    .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon:before {
+        transform: translateY(8px) rotate(-45deg);
+    }
+    .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
+        border-color: transparent;
+    }
+    .nav-link{
+        color: #212121 !important;
+        font-weight: 500;
+        transition: all 200ms linear;
+    }
+    .nav-item:hover .nav-link{
+        color: #8167a9 !important;
+    }
+    .nav-item.active .nav-link{
+        color: #777 !important;
+    }
+    .nav-link {
+        position: relative;
+        padding: 5px 0 !important;
+        display: inline-block;
+    }
+    .nav-item:after{
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        content: '';
+        background-color: #8167a9;
+        opacity: 0;
+        transition: all 200ms linear;
+    }
+    .nav-item:hover:after{
+        bottom: 0;
+        opacity: 1;
+    }
+    .nav-item.active:hover:after{
+        opacity: 0;
+    }
+    .nav-item{
+        position: relative;
+        transition: all 200ms linear;
+    }
+    .nav-item{
+        margin-left: 10px;
+    }
+    </style>
 </head>
 <body>
     <header>
-        <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="navigation-wrap bg-light start-header start-style">
             <div class="container">
-                <a class="navbar-brand" href="{% url 'home' %}">Jobhub</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ml-auto">
+                <div class="row">
+                    <div class="col-12">
+                        <nav class="navbar navbar-expand-md navbar-light">
                         
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'home' %}">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Services</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Events</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Contact-Us</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'login' %}">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'signup' %}">Signup</a>
-                        </li>
-                    </ul>
+                            <a class="navbar-brand" href="{% url 'home' %}"><img src="https://assets.codepen.io/1462889/fcy.png" alt=""></a>	
+                            
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="navbar-nav ml-auto py-4 py-md-0">
+                                    <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+                                        <a class="nav-link" href="{% url 'home' %}" role="button">Home</a>
+                                        
+                                    </li>
+                                    <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+                                        <a class="nav-link" href="">About</a>
+                                    </li>
+                                    <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+                                        <a class="nav-link" href="#">Services</a>
+                                        
+                                    </li>
+                                    <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+                                        <a class="nav-link" href="#">Events</a>
+                                    </li>
+                                    <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+                                        <a class="nav-link" href="#">Contact</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
+                                <ul class="navbar-nav ml-auto">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'login' %}"><i class="fa fa-sign-in-alt"></i> Login <span class="sr-only">(current)</span></a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'signup' %}">Signup</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#"><i class="fa fa-envelope"></i> Contact <span class="sr-only">(current)</span></a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#"><i class="fa fa-gear"></i> Settings</a>
+                                    </li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> Profile </a>
+                                        <div class="dropdown-menu dropdown-menu-right dropdown-cyan" aria-labelledby="navbarDropdownMenuLink-4">
+                                            <a class="dropdown-item" href="#">My account</a>
+                                            <a class="dropdown-item" href="#">Log out</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>		
+                    </div>
                 </div>
             </div>
-        </nav> -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand font-bold" href="{% url 'home' %}">Jobhub</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-4" aria-controls="navbarSupportedContent-4" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto">
-                    
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'home' %}">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Services</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Events</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Contact-Us</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'login' %}"><i class="fas fa-sign-in-alt"></i> Login <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'signup' %}">Signup</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fa fa-envelope"></i> Contact <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fa fa-gear"></i> Settings</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> Profile </a>
-                        <div class="dropdown-menu dropdown-menu-right dropdown-cyan" aria-labelledby="navbarDropdownMenuLink-4">
-                            <a class="dropdown-item" href="#">My account</a>
-                            <a class="dropdown-item" href="#">Log out</a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+        </div>
+        
     </header>
+
+    
     <div class="container">
         {% block content %}
         {% endblock %}
