@@ -15,10 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from accounts.views import verify
+from accounts.views import employer_verify, jobseeker_verify
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('blogs.urls')),
     path('accounts/', include('accounts.urls')),
-    path('verify/<token>', verify, name='verify'),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('employer-verify/<token>', employer_verify, name='verify'),
+    path('jobseeker-verify/<token>', jobseeker_verify, name='verify'),
 ]

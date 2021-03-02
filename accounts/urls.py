@@ -8,7 +8,7 @@ urlpatterns = [
     path('login/employer/', views.employer_login, name='employer_login'),
 
     path('jobseeker-registration/', views.jobseeker_register, name='jobseeker_register'),
-
+    path('login/jobseeker/', views.jobseeker_login, name='jobseeker_login'),
     
 
 ]

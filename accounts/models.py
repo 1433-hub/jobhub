@@ -22,8 +22,7 @@ class Jobseeker(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     is_jobseeker = models.BooleanField(default=False)
     gender = models.CharField(max_length=1, choices=GENDER_CHOICE, default='M')
-    date_of_birth = models.DateField()
-    job_category = models.CharField(max_length=150, choices=JOB_CATEGORY_TYPE, default=None)
+    job_category = models.CharField(max_length=150, choices=JOB_CATEGORY_TYPE, default=None, null=True)
     token = models.CharField(max_length=200)
 
     def __str__(self):

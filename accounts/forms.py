@@ -24,3 +24,25 @@ class EmployerSignUpForm(forms.Form):
     class Meta:
         model = Employer
         fields = ('industry_type')
+
+
+class JobseekerSignUpForm(forms.Form):
+    JOB_CATEGORY_TYPE = (
+        ('Construction/Engineering','Construction/Engineering'),
+        ('Create/Graphic','Create/Graphic'),
+        ('Teaching/Education','Teaching/Education'),
+        ('Hospitality','Hospitality'),
+        ('Marketing/Advertising','Marketing/Advertising'),
+        ('Accounting/Finance','Accounting/Finance'),
+        ('IT & Communication','IT & Communication'),
+    )
+    GENDER_CHOICE = (
+        ('M','Male'),
+        ('F','Female'),
+    )
+
+    job_category = forms.ChoiceField(choices=JOB_CATEGORY_TYPE)
+    gender = forms.ChoiceField(choices=GENDER_CHOICE)
+    class Meta:
+        model = Employer
+        fields = ('gender', 'job_category')
