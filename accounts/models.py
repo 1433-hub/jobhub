@@ -16,8 +16,15 @@ class Jobseeker(models.Model):
         ('Accounting/Finance','Accounting/Finance'),
         ('IT & Communication','IT & Communication'),
     )
+    GENDER_CHOICE = (
+        ('M','Male'),
+        ('F','Female'),
+    )
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    gender = models.CharField(max_length=1, choices=GENDER_CHOICE, default='M')
+    date_of_birth = models.DateField()
+    phone_number = models.IntegerField(default=None)
     job_category = models.CharField(max_length=150, choices=JOB_CATEGORY_TYPE, default=None)
 
 class Employer(models.Model):
@@ -32,4 +39,5 @@ class Employer(models.Model):
     )
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    phone_number = models.IntegerField(default=None)
     industry_type = models.CharField(max_length=150, choices=INDUSTRY_TYPE_CHOICE, default=None)
