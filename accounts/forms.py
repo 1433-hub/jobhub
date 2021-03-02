@@ -1,6 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm  
-from .models import User, Jobseeker, Employer
+from .models import Jobseeker, Employer
 from django import forms
+from django.contrib.auth.models import User
 
 class UserSignUpForm(UserCreationForm):  
     email = forms.EmailField()
@@ -19,8 +20,7 @@ class EmployerSignUpForm(forms.Form):
         ('E-commerce/E-business','E-commerce/E-business'),
     )
 
-    phone_number = forms.IntegerField()
     industry_type = forms.ChoiceField(choices=INDUSTRY_TYPE_CHOICE)
     class Meta:
         model = Employer
-        fields = ('industry_type', 'phone_number')
+        fields = ('industry_type')

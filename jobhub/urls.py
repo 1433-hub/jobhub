@@ -15,9 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-
+from accounts.views import verify
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('blogs.urls')),
     path('accounts/', include('accounts.urls')),
+    path('verify/<token>', verify, name='verify'),
 ]
