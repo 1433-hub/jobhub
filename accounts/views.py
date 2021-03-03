@@ -10,16 +10,18 @@ from django.contrib.auth.models import User
 
 
 
-# Create your views here.
+# sign up 
 def signup(request):
     return render(request, 'accounts/signup.html')
 
+#login
 def login(request):
     return render(request, 'accounts/login.html')
 
     
 #jobseeker sign
 # create an object of jobseeker and User
+# send email to user
 def jobseeker_register(request):
     user_form = UserSignUpForm()
     jobseeker_form = JobseekerSignUpForm()
@@ -49,6 +51,7 @@ def jobseeker_register(request):
 
     return render(request, 'accounts/jobseeker_register.html', context)
 
+# send email method to activate the user
 def jobseeker_activate(email, token):
     mail_subject = 'Activate your account.'
     message = f'Please click on the link to confirm your registration, http://127.0.0.1:8000/jobseeker-verify/{token}'
@@ -56,7 +59,7 @@ def jobseeker_activate(email, token):
     list = [email]
     send_mail(mail_subject, message, email_from, list)
 
-
+# to verify your user account
 def jobseeker_verify(request, token):
     try:
         jobseeker_object = Jobseeker.objects.filter(token=token).first()
@@ -71,7 +74,7 @@ def jobseeker_verify(request, token):
     except Exception as e:
         print(e)
 
-
+#jobseeker login page
 def jobseeker_login(request):
     try:
         if request.method == 'POST':
@@ -103,7 +106,7 @@ def jobseeker_login(request):
 
 #employer registration
 # create object of user and employer
-#  
+#  send email 
 def employer_register(request):
     user_form = UserSignUpForm()
     employer_form = EmployerSignUpForm()
@@ -164,7 +167,7 @@ def employer_verify(request, token):
     except Exception as e:
         print(e)
 
-
+# employer login
 def employer_login(request):
 
     try:
