@@ -10,5 +10,6 @@ urlpatterns = [
     path('jobseeker-registration/', views.jobseeker_register, name='jobseeker_register'),
     path('login/jobseeker/', views.jobseeker_login, name='jobseeker_login'),
     
+    path('change-password/', views.change_password, name='change_password'),
 
 ]

@@ -9,6 +9,10 @@ from django.conf import settings
 from django.contrib.auth.models import User
 
 
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
+
+
 
 # sign up 
 def signup(request):
@@ -92,9 +96,9 @@ def jobseeker_login(request):
         print(username, password)
         user = authenticate(request, username=username, password=password)
         if user is not None:
-            print (username)
+            # print (username)
             if user.jobseeker.is_jobseeker:
-                print(password)
+                # print(password)
                 loggedin(request, user)
                 return redirect('home')
         else:
@@ -196,5 +200,23 @@ def employer_login(request):
         print(e)
 
     return render(request, 'accounts/employer_login.html')
+
+
+# change password
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(request, 'Your password was successfully updated!')
+            return redirect('change_password')
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'accounts/change_password.html', {
+        'form': form
+    })
 
     
