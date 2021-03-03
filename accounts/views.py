@@ -40,16 +40,14 @@ def jobseeker_register(request):
             if user_form.is_valid() and jobseeker_form.is_valid():
                 user_form.is_active = False
                 email = request.POST.get('email')
-                print(email)
+                # print(email)
                 user_form.save()
                 token = str(uuid.uuid4())
 
                 jobseeker_profile = Jobseeker.objects.create(user=user_form.instance, token = token)
                 jobseeker_profile.save()
-
-
                 jobseeker_activate(email, token)
-
+                return redirect('login')
     except Exception as e:
         print(e)
 
@@ -71,9 +69,9 @@ def jobseeker_verify(request, token):
             jobseeker_object.is_jobseeker = True
             jobseeker_object.save()
             print('Your account is verified')
-            return redirect('login')
+            return redirect('jobseeker_login')
         else:
-            return redirect('/')
+            return render(request, 'accounts/jobseeker_register.html')
 
     except Exception as e:
         print(e)
@@ -102,7 +100,7 @@ def jobseeker_login(request):
                 loggedin(request, user)
                 return redirect('home')
         else:
-            return render(request, 'accounts/login.html')
+            return render(request, 'accounts/jobseeker_login.html')
     except Exception as e:
         print(e)
 
@@ -134,14 +132,14 @@ def employer_register(request):
                 
                 token = str(uuid.uuid4())
 
-
                 # print(token)
                 employer_profile = Employer.objects.create(user=user_form.instance, token = token)
                 employer_profile.save()
 
-
                 employer_activate(email, token)
-
+                return redirect('login')
+            else:
+                return redirect('signup')
     except Exception as e:
         print(e)
 
@@ -164,9 +162,9 @@ def employer_verify(request, token):
             employer_object.is_employer = True
             employer_object.save()
             print('Your account is verified')
-            return redirect('login')
+            return redirect('employer_login')
         else:
-            return redirect('/')
+            return redirect('employer_register')
 
     except Exception as e:
         print(e)
@@ -195,7 +193,7 @@ def employer_login(request):
                 loggedin(request, user)
                 return redirect('home')
         else:
-            return render(request, 'accounts/login.html')
+            return render(request, 'accounts/employer_login.html')
     except Exception as e:
         print(e)
 
@@ -209,7 +207,7 @@ def change_password(request):
         if form.is_valid():
             user = form.save()
             update_session_auth_hash(request, user)  # Important!
-            messages.success(request, 'Your password was successfully updated!')
+            # messages.success(request, 'Your password was successfully updated!')
             return redirect('change_password')
         else:
             messages.error(request, 'Please correct the error below.')
