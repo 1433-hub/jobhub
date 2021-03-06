@@ -2,6 +2,15 @@
 {% load static %}
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/accounts/login.css' %}">
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+      {{ message }}
+    </div>
+  {% endfor %}
+{% endif %}
 <h2 style="margin-top: 10%;">Login with your registered Email & Password.</h2>
 <hr>
 <div btn-group data-grouptype="OR" style=" margin-bottom: 10%;">

@@ -47,11 +47,17 @@ def jobseeker_register(request):
                 jobseeker_profile = Jobseeker.objects.create(user=user_form.instance, token = token)
                 jobseeker_profile.save()
                 jobseeker_activate(email, token)
-                return redirect('login')
+                messages.add_message(request, messages.INFO, 'Please check your email to verify your Account!')
+                return redirect('jobseeker_register')
+
+            else:
+                messages.add_message(request, messages.ERROR, 'This username is already taken!')
     except Exception as e:
         print(e)
 
     return render(request, 'accounts/jobseeker_register.html', context)
+
+
 
 # send email method to activate the user
 def jobseeker_activate(email, token):
@@ -61,6 +67,9 @@ def jobseeker_activate(email, token):
     list = [email]
     send_mail(mail_subject, message, email_from, list)
 
+
+
+
 # to verify your user account
 def jobseeker_verify(request, token):
     try:
@@ -68,7 +77,7 @@ def jobseeker_verify(request, token):
         if jobseeker_object:
             jobseeker_object.is_jobseeker = True
             jobseeker_object.save()
-            print('Your account is verified')
+            
             return redirect('jobseeker_login')
         else:
             return render(request, 'accounts/jobseeker_register.html')
@@ -85,11 +94,11 @@ def jobseeker_login(request):
 
         user_obj = User.objects.filter(username=username).first()
         if user_obj is None:
-            print('User not fount')
+            messages.add_message(request, messages.WARNING, 'You have not been register yet!' )
 
         joseeker_profile = Jobseeker.objects.filter(user = user_obj).first()
         if joseeker_profile.is_jobseeker == False:
-            print("this user is not employer")
+            messages.add_message(request, messages.WARNING, 'Please check your email to verify!' )
 
         print(username, password)
         user = authenticate(request, username=username, password=password)
@@ -100,7 +109,7 @@ def jobseeker_login(request):
                 loggedin(request, user)
                 return redirect('home')
         else:
-            return render(request, 'accounts/jobseeker_login.html')
+            messages.add_message(request, messages.ERROR, 'Incorrect Username or Password!')
     except Exception as e:
         print(e)
 
@@ -137,9 +146,10 @@ def employer_register(request):
                 employer_profile.save()
 
                 employer_activate(email, token)
+                messages.add_message(request, messages.INFO, 'Please check your email to verify your Account!')
                 return redirect('login')
             else:
-                return redirect('signup')
+                messages.add_message(request, messages.ERROR, 'This username is already taken!')
     except Exception as e:
         print(e)
 
@@ -170,6 +180,10 @@ def employer_verify(request, token):
         print(e)
 
 # employer login
+# get value of username and password
+# check the user with username fields
+# check the user, and if the user is authenticated user is verified as employer 
+# sends user to employer page
 def employer_login(request):
 
     try:
@@ -178,22 +192,22 @@ def employer_login(request):
             password = request.POST.get('password')
         user_obj = User.objects.filter(username=username).first()
         if user_obj is None:
-            print('User not fount')
+            messages.add_message(request, messages.ERROR, 'You have not been register yet!')
 
         employer_profile = Employer.objects.filter(user = user_obj).first()
         if employer_profile.is_employer == False:
-            print("this user is not employer")
+            messages.add_message(request, messages.WARNING, 'Please check your email to verify!' )
 
         print(username, password)
         user = authenticate(request, username=username, password=password)
         if user is not None:
             print (username)
             if user.employer.is_employer:
-                print(password)
+                
                 loggedin(request, user)
-                return redirect('home')
+                return redirect('employer_profile')
         else:
-            return render(request, 'accounts/employer_login.html')
+            messages.add_message(request, messages.ERROR, 'Incorrect Username or Password!')
     except Exception as e:
         print(e)
 
@@ -207,10 +221,10 @@ def change_password(request):
         if form.is_valid():
             user = form.save()
             update_session_auth_hash(request, user)  # Important!
-            # messages.success(request, 'Your password was successfully updated!')
+            messages.success(request, 'Your password was successfully updated!')
             return redirect('change_password')
         else:
-            messages.error(request, 'Please correct the error below.')
+            messages.add_message(request, messages.ERROR, 'Incorrect Username or Password!')
     else:
         form = PasswordChangeForm(request.user)
     return render(request, 'accounts/change_password.html', {
