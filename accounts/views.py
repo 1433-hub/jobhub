@@ -40,7 +40,7 @@ def jobseeker_register(request):
             if user_form.is_valid() and jobseeker_form.is_valid():
                 user_form.is_active = False
                 email = request.POST.get('email')
-                # print(email)
+                print(email)
                 user_form.save()
                 token = str(uuid.uuid4())
 

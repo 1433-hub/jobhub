@@ -1,3 +1,5 @@
 from django.contrib import admin
+from .models import Jobseeker_profile
 
-# Register your models here.
+
+admin.site.register(Jobseeker_profile)
