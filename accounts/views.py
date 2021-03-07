@@ -40,11 +40,17 @@ def jobseeker_register(request):
             if user_form.is_valid() and jobseeker_form.is_valid():
                 user_form.is_active = False
                 email = request.POST.get('email')
-                print(email)
+                # print(email)
+
+                gender = request.POST.get('gender')
+                # print(gender)
+
+                job_category = request.POST.get('job_category')
+                # print(job_category)
                 user_form.save()
                 token = str(uuid.uuid4())
 
-                jobseeker_profile = Jobseeker.objects.create(user=user_form.instance, token = token)
+                jobseeker_profile = Jobseeker.objects.create(user=user_form.instance, token = token, gender=gender, job_category=job_category)
                 jobseeker_profile.save()
                 jobseeker_activate(email, token)
                 messages.add_message(request, messages.INFO, 'Please check your email to verify your Account!')
@@ -142,7 +148,7 @@ def employer_register(request):
                 token = str(uuid.uuid4())
 
                 # print(token)
-                employer_profile = Employer.objects.create(user=user_form.instance, token = token)
+                employer_profile = Employer.objects.create(user=user_form.instance, token = token, industry_type=industry_type)
                 employer_profile.save()
 
                 employer_activate(email, token)

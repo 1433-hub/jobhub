@@ -11,6 +11,7 @@ class UserSignUpForm(UserCreationForm):
 
 class EmployerSignUpForm(forms.Form):
     INDUSTRY_TYPE_CHOICE = (
+        ('Select One','Select One'),
         ('Manufacturing/Engineering','Manufacturing/Engineering'),
         ('Advertising Agency','Advertising Agency'),
         ('Banks','Banks'),
@@ -28,6 +29,7 @@ class EmployerSignUpForm(forms.Form):
 
 class JobseekerSignUpForm(forms.Form):
     JOB_CATEGORY_TYPE = (
+        ('Select One','Select One'),
         ('Construction/Engineering','Construction/Engineering'),
         ('Create/Graphic','Create/Graphic'),
         ('Teaching/Education','Teaching/Education'),

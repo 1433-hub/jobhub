@@ -7,14 +7,80 @@
 
 </div>
 <div class="content-section">
+    <h1>Basic Information</h1>
+    <hr>
     <div class="media">
         <img class="rounded-circle account-img" src="{{user.jobseeker.jobseeker_profile.image.url}}" alt="profile picture" height="100" width="100">
         <div class="media-body">
             <h2 class="account-heading">{{user.username }}</h2>
-            <p class="text-secondary">{{ user.email }}</p>
+            <p class="text-secondary">Email: {{ user.email }}</p>
+            <p class="text-secondary">Job Category: {{ user.jobseeker.job_category }}</p>
+            <p class="text-secondary">Gender: {{ user.jobseeker.gender }}</p>
+            <p class="text-secondary">Contact Number: {{ user.jobseeker.jobseeker_profile.phone_number }}</p>
+            <p class="text-secondary">Date of Birth: {{ user.jobseeker.jobseeker_profile.date_of_birth }}</p>
         </div>
     </div>
     <!-- form -->
 </div>
 <hr>
+
+
+<div class="content-section" style="margin-top: 10%;">
+    <h1>Education</h1>
+    <hr>
+    <div class="media">
+        <div class="media-body">
+            <p class="text-secondary">School: {{ user.jobseeker.jobseeker_education.school_name }}</p>
+            <p class="text-secondary">High School: {{ user.jobseeker.jobseeker_education.high_school  }}</p>
+            <p class="text-secondary">Degree: {{ user.jobseeker.jobseeker_education.degree  }}</p>
+            <p class="text-secondary">Start Date: {{ user.jobseeker.jobseeker_education.start_date }}</p>
+            <p class="text-secondary">End Date: {{ user.jobseeker.jobseeker_education.end_date }}</p>
+            <p class="text-secondary">Description: {{ user.jobseeker.jobseeker_education.description }}</p>
+        </div>
+    </div>
+    <!-- form -->
+</div>
+<hr>
+
+<div class="content-section" style="margin-top: 10%;">
+    <h1>Employment</h1>
+    <hr>
+    <div class="media">
+        <div class="media-body">
+            <p class="text-secondary">Company Name: {{ user.jobseeker.jobseeker_employment.company_name }}</p>
+            <p class="text-secondary">Designation: {{ user.jobseeker.jobseeker_employment.designation }}</p>
+            <p class="text-secondary">Title: {{ user.jobseeker.jobseeker_employment.title }}</p>
+            <p class="text-secondary">Start Date: {{ user.jobseeker.jobseeker_employment.start_date }}</p>
+            <p class="text-secondary">End Date: {{ user.jobseeker.jobseeker_employment.end_date }}</p>
+            <p class="text-secondary">Description: {{ user.jobseeker.jobseeker_employment.description }}</p>
+        </div>
+    </div>
+    <!-- form -->
+</div>
+<hr>
+
+<div class="content-section" style="margin-top: 10%;">
+    <h1>Language</h1>
+    <hr>
+    <div class="media">
+        <div class="media-body">
+            <p class="text-secondary">Language: {{ user.jobseeker.jobseeker_language.language }}</p>
+        </div>
+    </div>
+    <!-- form -->
+</div>
+<hr>
+
+<div class="content-section" style="margin-top: 10%;">
+    <h1>Skill</h1>
+    <hr>
+    <div class="media">
+        <div class="media-body">
+            <p class="text-secondary">Skill: {{ user.jobseeker.jobseeker_skill.skill }}</p>
+        </div>
+    </div>
+    <!-- form -->
+</div>
+<hr>
+
 {% endblock %}

@@ -6,6 +6,7 @@ from django.dispatch import receiver
 
 class Jobseeker(models.Model):
     JOB_CATEGORY_TYPE = (
+        ('Select One','Select One'),
         ('Construction/Engineering','Construction/Engineering'),
         ('Create/Graphic','Create/Graphic'),
         ('Teaching/Education','Teaching/Education'),
@@ -22,7 +23,7 @@ class Jobseeker(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     is_jobseeker = models.BooleanField(default=False)
     gender = models.CharField(max_length=1, choices=GENDER_CHOICE, default='M')
-    job_category = models.CharField(max_length=150, choices=JOB_CATEGORY_TYPE, default=None, null=True)
+    job_category = models.CharField(max_length=150, choices=JOB_CATEGORY_TYPE, default='None', null=True)
     token = models.CharField(max_length=200)
 
     def __str__(self):
@@ -30,6 +31,7 @@ class Jobseeker(models.Model):
 
 class Employer(models.Model):
     INDUSTRY_TYPE_CHOICE = (
+        ('Select One','Select One'),
         ('Manufacturing/Engineering','Manufacturing/Engineering'),
         ('Advertising Agency','Advertising Agency'),
         ('Banks','Banks'),
