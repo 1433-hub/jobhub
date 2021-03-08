@@ -113,7 +113,7 @@ def jobseeker_login(request):
             if user.jobseeker.is_jobseeker:
                 # print(password)
                 loggedin(request, user)
-                return redirect('home')
+                return redirect('jobseeker_profile')
         else:
             messages.add_message(request, messages.ERROR, 'Incorrect Username or Password!')
     except Exception as e:

@@ -10,8 +10,9 @@
     <div class="media">
         <img class="rounded-circle account-img" src="{{user.employer.employer_profile.image.url}}" alt="profile picture" height="100" width="100">
         <div class="media-body">
-            <h2 class="account-heading">{{user.username }}</h2>
-            <p class="text-secondary">{{ user.email }}</p>
+            <h2 class="account-heading">Employer Name: {{user.username }}</h2>
+            <p class="text-secondary">Email: {{ user.email }}</p>
+            <p class="text-secondary">Industry type: {{ user.employer.industry_type }}</p>
         </div>
     </div>
     <!-- form -->

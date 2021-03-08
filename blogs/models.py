@@ -73,9 +73,12 @@ class Jobseeker_employment(models.Model):
     def __str__(self):
         return self.jobseeker_user.user.username
 
+
+
 class Employer_profile(models.Model):
     employer_user = models.OneToOneField(Employer, on_delete=models.CASCADE)
     image = models.ImageField(default='default.png', upload_to='profile_pics')
+    phone_number = models.PositiveBigIntegerField(blank=True, null=True)
 
     def __str__(self):
         return self.employer_user.user.username
