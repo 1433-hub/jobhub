@@ -13,7 +13,7 @@ class Jobseeker_profile(models.Model):
     def __str__(self):
         return self.jobseeker_user.user.username
 # education table of jobseeker
-class Jobseeker_education(models.Model):
+class Education(models.Model):
     jobseeker_user = models.OneToOneField(Jobseeker, on_delete=models.CASCADE)
     school_name = models.CharField(max_length=150, blank=True, null=True)
     high_school = models.CharField(max_length=150, blank=True, null=True)
@@ -27,7 +27,7 @@ class Jobseeker_education(models.Model):
 
 
 # language table of jobseeker
-class Jobseeker_language(models.Model):
+class Language(models.Model):
     LANGUAGE_CHOICE = (
         ('English', 'English'),
         ('Nepali', 'Nepali'),
@@ -42,7 +42,7 @@ class Jobseeker_language(models.Model):
         return self.jobseeker_user.user.username
 
 # skill table of jobseeker
-class Jobseeker_skill(models.Model):
+class Skill(models.Model):
     SKILL_CHOICE = (
         ('Web Development', 'Web Development'),
         ('Communication', 'Communication'),
@@ -61,7 +61,7 @@ class Jobseeker_skill(models.Model):
 
 
 # employment table of jobseeker
-class Jobseeker_employment(models.Model):
+class Employment(models.Model):
     jobseeker_user = models.OneToOneField(Jobseeker, on_delete=models.CASCADE)
     company_name = models.CharField(max_length=150, blank=True, null=True)
     designation = models.CharField(max_length=150, blank=True, null=True)

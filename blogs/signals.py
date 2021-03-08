@@ -18,6 +18,21 @@ def save_jobseeker_profile(sender, instance, **kwargs):
     instance.jobseeker_profile.save()
 
 
+#create a jobseeker profile
+@receiver(post_save, sender=Employer)
+def create_employer_profile(sender, instance, created, **kwargs):
+    if created:
+        Employer_profile.objects.create(employer_user=instance)
+
+
+
+
+#save employer profile in db
+@receiver(post_save, sender=Employer)
+def save_employer_profile(sender, instance, **kwargs):
+    instance.employer_profile.save()
+
+
 
 
 
