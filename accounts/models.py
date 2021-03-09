@@ -43,6 +43,7 @@ class Employer(models.Model):
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     is_employer = models.BooleanField(default=False)
+    company_name = models.CharField(max_length=150, default=False)
     industry_type = models.CharField(max_length=150, choices=INDUSTRY_TYPE_CHOICE, default='None', null=True)
     token = models.CharField(max_length=200)
     

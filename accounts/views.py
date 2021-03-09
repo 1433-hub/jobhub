@@ -143,12 +143,13 @@ def employer_register(request):
                 user_form.save()
 
                 industry_type = request.POST.get('industry_type')
+                company_name = request.POST.get('company_name')
                 # print(industry_type)
                 
                 token = str(uuid.uuid4())
 
                 # print(token)
-                employer_profile = Employer.objects.create(user=user_form.instance, token = token, industry_type=industry_type)
+                employer_profile = Employer.objects.create(user=user_form.instance, token = token, industry_type=industry_type, company_name=company_name)
                 employer_profile.save()
 
                 employer_activate(email, token)

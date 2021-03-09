@@ -3,15 +3,31 @@
 {% block content %}
 <h1 style="padding-top: 100px;"></h1>
 <link rel="stylesheet" href="{% static 'css/profile/employer_profile.css' %}">
+<style>
+    .profile-body{
+        border-bottom-color: #A1D36E;
+	    box-shadow: 0 0 5px rgba(0,80,80,.4); 
+	    border-radius: 4px;
+        padding: 3%;
+        background-color: #A1D36E;
+        color: whitesmoke;
+    }
+    .text-secondary{
+        color: whitesmoke;
+    }
+</style>
 <div class="jumbotron">
 
 </div>
-<div class="content-section">
+<div class="content-section profile-body">
+    <h1>Basic Information<a href="{% url 'jobseeker_profile_update' %}" style="padding-left: 30%; color: whitesmoke;"><i class="fas fa-pencil-alt"></i></a></h1>
+    <hr>
     <div class="media">
         <img class="rounded-circle account-img" src="{{user.employer.employer_profile.image.url}}" alt="profile picture" height="100" width="100">
         <div class="media-body">
-            <h2 class="account-heading">Employer Name: {{user.username }}</h2>
-            <p class="text-secondary">Email: {{ user.email }}</p>
+            <h2 class="account-heading">Full Name: {{user.first_name }} {{user.last_name }}</h2>
+            <p class="text-secondary" style="color: whitesmoke;">Email: {{ user.email }}</p>
+            <p class="text-secondary" style="color: whitesmoke;">Company Name: {{ user.employer.company_name }}</p>
             <p class="text-secondary">Industry type: {{ user.employer.industry_type }}</p>
         </div>
     </div>

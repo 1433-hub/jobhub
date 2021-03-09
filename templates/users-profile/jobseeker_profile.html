@@ -3,84 +3,121 @@
 {% block content %}
 <h1 style="padding-top: 100px;"></h1>
 <link rel="stylesheet" href="{% static 'css/profile/jobseeker_profile.css' %}">
+<style>
+    .profile-body{
+        border-bottom-color: #6AD1DD;
+	    box-shadow: 0 0 5px rgba(0,80,80,.4); 
+	    border-radius: 4px;
+        padding: 3%;
+        background-color: #6AD1DD;
+        color: white;
+    }
+</style>
+{% if messages %}
+        {% for message in messages %}
+                <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
 <div class="jumbotron">
 
 </div>
-<div class="content-section">
-    <h1>Basic Information</h1>
-    <hr>
-    <div class="media">
-        <img class="rounded-circle account-img" src="{{user.jobseeker.jobseeker_profile.image.url}}" alt="profile picture" height="100" width="100">
-        <div class="media-body">
-            <h2 class="account-heading">Username: {{user.username }}</h2>
-            <p class="text-secondary">Email: {{ user.email }}</p>
-            <p class="text-secondary">Job Category: {{ user.jobseeker.job_category }}</p>
-            <p class="text-secondary">Gender: {{ user.jobseeker.gender }}</p>
-            <p class="text-secondary">Contact Number: {{ user.jobseeker.jobseeker_profile.phone_number }}</p>
-            <p class="text-secondary">Date of Birth: {{ user.jobseeker.jobseeker_profile.date_of_birth }}</p>
+<div class="row">
+    <div class="col-md-7">
+        <div class="content-section profile-body">
+            <h1>Basic Information<a href="{% url 'jobseeker_profile_update' %}" style="padding-left: 30%; color: whitesmoke;"><i class="fas fa-pencil-alt"></i></a></h1>
+            <hr>
+            <div class="media">
+                <img class="rounded-circle account-img" src="{{user.jobseeker.jobseeker_profile.image.url}}" alt="profile picture" height="150" width="150">
+                <div class="media-body">
+                    {% if user.jobseeker.gender == 'M' %}
+                        <h2 class="account-heading">Mr. {{user.first_name }} {{user.last_name }}</h2>
+                    {% else %}
+                    <h2 class="account-heading">Ms. {{user.first_name }} {{user.last_name }}</h2>
+                    {% endif %}
+                    <p class="text-secondary">Email: {{ user.email }}</p>
+                    <p class="text-secondary">Job Category: {{ user.jobseeker.job_category }}</p>
+                    <p class="text-secondary">Gender: {{ user.jobseeker.gender }}</p>
+                    <p class="text-secondary">Contact Number: {{ user.jobseeker.jobseeker_profile.phone_number }}</p>
+                    <p class="text-secondary">Date of Birth: {{ user.jobseeker.jobseeker_profile.date_of_birth }}</p>
+                </div>
+            </div>
+            <!-- form -->
         </div>
     </div>
-    <!-- form -->
+
+    <div class="col-md-5">
+        <div class="content-section profile-body">
+            <h1>Skill<a href="{% url 'jobseeker_skill_update' %}" style="padding-left: 65%; color: whitesmoke;"><i class="fas fa-pencil-alt"></i></a></h1>
+            <hr>
+            <div class="media">
+                <div class="media-body">
+                    <p class="text-secondary">{{ user.jobseeker.skill.skill }}</p>
+                </div>
+            </div>
+            <!-- form -->
+        </div>
+        <div class="content-section profile-body" style="margin-top: 15%;">
+            <h1>Language<a href="{% url 'jobseeker_language_update' %}" style="padding-left: 35%; color: whitesmoke;"><i class="fas fa-pencil-alt"></i></a></h1>
+            <hr>
+            <div class="media">
+                <div class="media-body">
+                    <p class="text-secondary">{{ user.jobseeker.language.language }}</p>
+                </div>
+            </div>
+            <!-- form -->
+        </div>
+    </div>
+</div>
+
+
+<div class="row" >
+    <div class="col-md-6">
+        <div class="content-section profile-body" style="margin-top: 10%;">
+            <h1>Education<a href="{% url 'jobseeker_education_update' %}" style="padding-left: 47%; color: whitesmoke;"><i class="fas fa-pencil-alt"></i></a></h1>
+            <hr>
+            <div class="media">
+                <div class="media-body">
+                    <p class="text-secondary">School: {{ user.jobseeker.education.school_name }}</p>
+                    <p class="text-secondary">High School: {{ user.jobseeker.education.high_school  }}</p>
+                    <p class="text-secondary">Degree: {{ user.jobseeker.education.degree  }}</p>
+                    <p class="text-secondary">Start Date: {{ user.jobseeker.education.start_date }}</p>
+                    <p class="text-secondary">End Date: {{ user.jobseeker.education.end_date }}</p>
+                    <p class="text-secondary">Description: {{ user.jobseeker.education.description }}</p>
+                </div>
+            </div>
+            <!-- form -->
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="content-section profile-body" style="margin-top: 10%;">
+            <h1>Employment<a href="{% url 'jobseeker_employment_update' %}" style="padding-left: 37%; color: whitesmoke;"><i class="fas fa-pencil-alt"></i></a></h1>
+            <hr>
+            <div class="media">
+                <div class="media-body">
+                    <p class="text-secondary">Company Name: {{ user.jobseeker.employment.company_name }}</p>
+                    <p class="text-secondary">Designation: {{ user.jobseeker.employment.designation }}</p>
+                    <p class="text-secondary">Title: {{ user.jobseeker.employment.title }}</p>
+                    <p class="text-secondary">Start Date: {{ user.jobseeker.employment.start_date }}</p>
+                    <p class="text-secondary">End Date: {{ user.jobseeker.employment.end_date }}</p>
+                    <p class="text-secondary">Description: {{ user.jobseeker.employment.description }}</p>
+                </div>
+            </div>
+            <!-- form -->
+        </div>
+    </div>
 </div>
 <hr>
 
 
-<div class="content-section" style="margin-top: 10%;">
-    <h1>Education</h1>
-    <hr>
-    <div class="media">
-        <div class="media-body">
-            <p class="text-secondary">School: {{ user.jobseeker.jobseeker_education.school_name }}</p>
-            <p class="text-secondary">High School: {{ user.jobseeker.jobseeker_education.high_school  }}</p>
-            <p class="text-secondary">Degree: {{ user.jobseeker.jobseeker_education.degree  }}</p>
-            <p class="text-secondary">Start Date: {{ user.jobseeker.jobseeker_education.start_date }}</p>
-            <p class="text-secondary">End Date: {{ user.jobseeker.jobseeker_education.end_date }}</p>
-            <p class="text-secondary">Description: {{ user.jobseeker.jobseeker_education.description }}</p>
-        </div>
-    </div>
-    <!-- form -->
-</div>
-<hr>
 
-<div class="content-section" style="margin-top: 10%;">
-    <h1>Employment</h1>
-    <hr>
-    <div class="media">
-        <div class="media-body">
-            <p class="text-secondary">Company Name: {{ user.jobseeker.jobseeker_employment.company_name }}</p>
-            <p class="text-secondary">Designation: {{ user.jobseeker.jobseeker_employment.designation }}</p>
-            <p class="text-secondary">Title: {{ user.jobseeker.jobseeker_employment.title }}</p>
-            <p class="text-secondary">Start Date: {{ user.jobseeker.jobseeker_employment.start_date }}</p>
-            <p class="text-secondary">End Date: {{ user.jobseeker.jobseeker_employment.end_date }}</p>
-            <p class="text-secondary">Description: {{ user.jobseeker.jobseeker_employment.description }}</p>
-        </div>
-    </div>
-    <!-- form -->
-</div>
-<hr>
 
-<div class="content-section" style="margin-top: 10%;">
-    <h1>Language</h1>
-    <hr>
-    <div class="media">
-        <div class="media-body">
-            <p class="text-secondary">Language: {{ user.jobseeker.jobseeker_language.language }}</p>
-        </div>
-    </div>
-    <!-- form -->
-</div>
-<hr>
 
-<div class="content-section" style="margin-top: 10%;">
-    <h1>Skill</h1>
-    <hr>
-    <div class="media">
-        <div class="media-body">
-            <p class="text-secondary">Skill: {{ user.jobseeker.jobseeker_skill.skill }}</p>
-        </div>
-    </div>
-    <!-- form -->
-</div>
-<hr>
+
+
 
 {% endblock %}
