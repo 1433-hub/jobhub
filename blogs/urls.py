@@ -7,6 +7,9 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('', views.home, name='home'),
     path('employer-profile/', views.employer_profile, name='employer_profile'),
+    path('employer-profile-update/', views.employer_profile_update, name='employer_profile_update'),
+
+
     path('jobseeker-profile/', views.jobseeker_profile, name='jobseeker_profile'),
     path('jobseeker-profile-update/', views.jobseeker_profile_update, name='jobseeker_profile_update'),
     path('jobseeker-skill-update/', views.jobseeker_skill_update, name='jobseeker_skill_update'),

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from blogs.forms import UserUpdateForm, JobseekerUpdateForm, JobseekerProfileUpdateForm, JobseekerSkillUpdateForm, JobseekerLanguageUpdateForm, JobseekerEducationUpdateForm, JobseekerEmploymentUpdateForm
+from blogs.forms import UserUpdateForm, EmployerUpdateForm, EmployerProfileUpdateForm, JobseekerUpdateForm, JobseekerProfileUpdateForm, JobseekerSkillUpdateForm, JobseekerLanguageUpdateForm, JobseekerEducationUpdateForm, JobseekerEmploymentUpdateForm
 from django.contrib import messages
 from django.http import HttpResponse
 
@@ -12,6 +12,33 @@ def home(request):
 @login_required
 def employer_profile(request):
     return render(request, 'users-profile/employer_profile.html')
+
+def employer_profile_update(request):
+    if request.method == 'POST':
+        user_form = UserUpdateForm(request.POST, 
+                                    instance=request.user)
+        employer_form = EmployerUpdateForm(request.POST, 
+                                            instance=request.user.employer)
+        employer_profile_form = EmployerProfileUpdateForm(request.POST, 
+                                                            request.FILES, 
+                                                            instance=request.user.employer.employer_profile)
+        if user_form.is_valid() and employer_form.is_valid() and employer_profile_form.is_valid():
+            user_form.save()
+            employer_form.save()
+            employer_profile_form.save()
+            messages.add_message(request, messages.SUCCESS, 'Your account has been updated!') 
+            return redirect('employer_profile')                                          
+    else:
+        user_form = UserUpdateForm(instance=request.user)
+        employer_form = EmployerUpdateForm(instance=request.user.employer)
+        employer_profile_form = EmployerProfileUpdateForm(instance=request.user.employer.employer_profile)
+        context = {
+            'user_form': user_form,
+            'employer_form': employer_form,
+            'employer_profile_form': employer_profile_form
+        }
+    return render(request, 'users-profile/employer_profile_update.html', context)
+
 
 # jobseeker profile page    
 @login_required
@@ -49,9 +76,9 @@ def jobseeker_profile_update(request):
 
 # update skill
 def jobseeker_skill_update(request):
-    
     skill = JobseekerSkillUpdateForm()
     if request.method == 'POST':
+        print('1')
         skill = JobseekerSkillUpdateForm(request.POST, instance=request.user.jobseeker.skill)
         if skill.is_valid():
             skill.save()

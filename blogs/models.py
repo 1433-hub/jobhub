@@ -54,7 +54,7 @@ class Skill(models.Model):
         ('Data Analysis', 'Data Analysis'),
     )
     jobseeker_user = models.OneToOneField(Jobseeker, on_delete=models.CASCADE)
-    skill = models.CharField(max_length=100, choices=SKILL_CHOICE, blank=True, null=True)
+    skill = models.CharField(max_length=100, choices=SKILL_CHOICE, blank=True)
 
     def __str__(self):
         return self.jobseeker_user.user.username

@@ -1,5 +1,5 @@
 from accounts.models import Jobseeker, Employer
-from blogs.models import Jobseeker_profile, Skill, Language, Education, Employment
+from blogs.models import Employer_profile, Jobseeker_profile, Skill, Language, Education, Employment
 from django import forms
 from django.contrib.auth.models import User
 
@@ -9,6 +9,16 @@ class UserUpdateForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'username', 'email']
+
+class EmployerUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Employer
+        fields = ['industry_type', 'company_name']
+
+class EmployerProfileUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Employer_profile
+        fields = ['image', 'phone_number']
 
 class JobseekerUpdateForm(forms.ModelForm):
     class Meta:
